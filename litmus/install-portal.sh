@@ -69,7 +69,7 @@ echo -e "\n---------------Installing MongoDB---------\n"
 
 # create a yaml file for mongo values
 
-helm install my-release bitnami/mongodb --values mongo-values.yml -n ${namespace} --create-namespace
+helm install my-release bitnami/mongodb --values litmus/mongo-values.yml  -n ${namespace} --create-namespace
 
 if [[ "$installation_mode" == "CS-MODE" ]];then
     install_portal_cs_mode
