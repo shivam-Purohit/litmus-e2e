@@ -13,7 +13,7 @@ deploy_self_agent=${DEPLOY_SELF_AGENT:="true"}
 function install_portal_cs_mode() {
 
     echo -e "\n---------------Installing Litmus-Portal in Cluster Scope----------\n"
-    curl https://raw.githubusercontent.com/litmuschaos/litmus/master/chaoscenter/manifests/litmus-cluster-scope.yaml --output litmus-portal-setup.yml
+    curl https://raw.githubusercontent.com/litmuschaos/litmus/master/mkdocs/docs/3.4.0/litmus-cluster-scope-3.4.0.yaml--output litmus-portal-setup.yml
     # manifest_image_update $version litmus/cluster-k8s-manifest.yml
 
     kubectl apply -f litmus-portal-setup.yml
