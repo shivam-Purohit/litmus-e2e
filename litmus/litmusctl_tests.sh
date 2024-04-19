@@ -233,7 +233,7 @@ function test_get_infras(){
         printf "\n project id is ${projectID}"
     if [[ ${noOfInfras} -gt 1 ]];then
         echo -e "\n[Info]: litmusctl get chaos-infra working fine ✓\n"
-        exit 1
+        exit 0
     else 
         echo -e "\n[Error]: litmusctl get chaos-infra not working as expected\n"
         exit 1
@@ -251,7 +251,7 @@ function test_create_project(){
 
     if [[ ${noOfProjects} -gt 2 ]];then
         echo -e "\n[Info]: litmusctl create project working fine ✓\n"
-        exit 1
+        exit 0
     else 
         echo -e "\n[Error]: litmusctl create project not working as expected\n"
         exit 1
@@ -271,7 +271,9 @@ function test_disconnect_infra() {
     disconnect_infra $chaos_infra_id $projectID
 
     chaos_infra_id=$(litmusctl get chaos-infra --project-id=$projectID | grep "${infraName}" | awk '{print $1}')
-
+    
+    infra_cleanup
+    
     if [[ ${chaos_delegate_id} == "" ]];then
         echo -e "\n[Info]: litmusctl disconnect chaos-infra working fine ✓\n"
     else 
@@ -279,7 +281,7 @@ function test_disconnect_infra() {
         exit 1
     fi
 
-    infra_cleanup
+
 }
 
 
