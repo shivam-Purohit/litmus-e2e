@@ -46,7 +46,10 @@ function configure_infra(){
 
     projectID=$(echo "q" | litmusctl get projects | grep "${projectName}" |  awk '{print $1}')
     echo "projectID obtained is ${projectID}"
+    # create a environment for the installation of infra
 
+    create_environment $envName
+    
     if [[ "$installation_mode" == "NS-MODE" ]];then
 
         kubectl create ns ${namespace}
