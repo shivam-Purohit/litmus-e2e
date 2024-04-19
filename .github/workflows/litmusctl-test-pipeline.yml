@@ -57,18 +57,18 @@ jobs:
           chmod +x litmusctl
           sudo mv litmusctl /usr/local/bin/litmusctl
           litmusctl version
-
-      - name: Running basic tests (Login and Onboarding Tests)
-        uses: cypress-io/github-action@v2
-        continue-on-error: false
-        with:
-          spec: cypress/integration/Basic_Setup/**/*.spec.js
-          working-directory: Cypress/
-          config-file: cypress.prod.json
-          env: true
+          
+      - name: Running Litmusctl CLI tests (litmusctl create project)
+        run: |
+          chmod 755 ./litmus/litmusctl_tests.sh
+          ./litmus/litmusctl_tests.sh test_create_project
         env:
-          CYPRESS_BASE_URL: ${{ env.URL }}
-
+          AGENT_NAMESPACE: "agent-4"
+          INSTALLATION_MODE: "NS-MODE"
+          ACCESS_URL: ${{ env.URL }}
+          AGENT_NAME: "agent-4"
+          PROJECT_NAME: "admin's project"
+          
       - name: Running Litmusctl CLI tests (Configured with NodeSelectors)
         run: |
           chmod 755 ./litmus/litmusctl_tests.sh
@@ -118,17 +118,6 @@ jobs:
         env:
           INSTALLATION_MODE: "NS-MODE"
           ACCESS_URL: ${{ env.URL }}
-          PROJECT_NAME: "admin's project"
-
-      - name: Running Litmusctl CLI tests (litmusctl create project)
-        run: |
-          chmod 755 ./litmus/litmusctl_tests.sh
-          ./litmus/litmusctl_tests.sh test_create_project
-        env:
-          AGENT_NAMESPACE: "agent-4"
-          INSTALLATION_MODE: "NS-MODE"
-          ACCESS_URL: ${{ env.URL }}
-          AGENT_NAME: "agent-4"
           PROJECT_NAME: "admin's project"
 
       - name: Running Litmusctl CLI tests (litmusctl disconnect chaos-infra)
