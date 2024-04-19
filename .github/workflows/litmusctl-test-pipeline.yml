@@ -15,7 +15,7 @@ env:
 # Jobs for deploying and testing litmus-portal on a KinD Cluster
 jobs:
   Namespace-Scope-Mode:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     strategy:
       fail-fast: false
       matrix:
