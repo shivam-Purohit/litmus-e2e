@@ -244,7 +244,7 @@ function test_get_infras(){
 function test_create_project(){
     configure_account
 
-    litmusctl create project --name="my new project"
+    litmusctl create project --name="${projectName}"
 
     noOfProjects=$(litmusctl get projects | wc -l)
     echo -e "is this actually two ${noOfProjects}"
