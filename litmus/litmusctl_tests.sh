@@ -3,7 +3,7 @@
 set -o pipefail
 
 # All intermediate functions are defined in utils.sh
-source utils.sh
+source litmus/utils.sh
 
 namespace=${AGENT_NAMESPACE}
 # namespace='shivamtestnamespace'
