@@ -119,9 +119,10 @@ jobs:
           chmod 755 ./litmus/litmusctl_tests.sh
           ./litmus/litmusctl_tests.sh test_get_infras
         env:
+          AGENT_NAMESPACE: "agent-5"
           INSTALLATION_MODE: "NS-MODE"
           ACCESS_URL: ${{ env.URL }}
-          AGENT_NAME: "agent-3"
+          AGENT_NAME: "agent-5"
           PROJECT_NAME: "admin's project"
           ENVIRONMENT_NAME: "testenv"
           
@@ -343,9 +344,10 @@ jobs:
           chmod 755 ./litmus/litmusctl_tests.sh
           ./litmus/litmusctl_tests.sh test_get_infras
         env:
+          AGENT_NAMESPACE: "agent-5"
           INSTALLATION_MODE: "CS-MODE"
           ACCESS_URL: ${{ env.URL }}
-          AGENT_NAME: "agent-3"
+          AGENT_NAME: "agent-5"
           PROJECT_NAME: "admin's project"
           ENVIRONMENT_NAME: "testenv"
           
