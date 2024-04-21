@@ -299,11 +299,7 @@ function test_disconnect_infra() {
         echo -e "\n[Error]: litmusctl disconnect chaos-infra not working as expected\n"
         exit 1
     fi
-
-
 }
-
-
 
 function test_create_environment(){
     configure_account
@@ -359,7 +355,7 @@ function test_delete_environment(){
 
     echo "y" | litmusctl delete chaos-environment --project-id=$projectID --environment-id=$envName
     # get environment
-    noOfEnvs=$(echo "q" | litmusctl get chaos-environments --project-id=$projectID | wc -l)
+    noOfEnvs=$(echo "q" | litmusctl get chaos-environments --project-id=$projectID | grep "${envName}" | wc -l)
     if [[ ${noOfEnvs} -lt 1 ]];then
         echo -e "\n[Info]: litmusctl delete chaos-environment working fine ✓\n"
         exit 0
