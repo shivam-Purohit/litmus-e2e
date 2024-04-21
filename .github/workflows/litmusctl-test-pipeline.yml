@@ -135,6 +135,7 @@ jobs:
           ACCESS_URL: ${{ env.URL }}
           AGENT_NAME: "agent-5"
           PROJECT_NAME: "admin's project"
+          ENVIRONMENT_NAME: "testenv"
 
       - name: Running Litmusctl CLI tests (litmusctl create chaos-enviroment)
         run: |
@@ -358,6 +359,7 @@ jobs:
           ACCESS_URL: ${{ env.URL }}
           AGENT_NAME: "agent-5"
           PROJECT_NAME: "admin's project"
+          ENVIRONMENT_NAME: "testenv"
 
       - name: Running Litmusctl CLI tests (litmusctl create chaos-enviroment)
         run: |
