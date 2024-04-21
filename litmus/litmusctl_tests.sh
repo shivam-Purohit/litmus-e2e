@@ -280,7 +280,7 @@ function test_create_project(){
 
 function test_disconnect_infra() {
     configure_account
-
+    create_environment $envName
     configure_infra "" ""
 
     projectID=$(litmusctl get projects | grep "${projectName}" |  awk '{print $1}')
@@ -292,8 +292,8 @@ function test_disconnect_infra() {
     chaos_infra_id=$(litmusctl get chaos-infra --project-id=$projectID | grep "${infraName}" | awk '{print $1}')
     
     infra_cleanup
-    
-    if [[ ${chaos_delegate_id} == "" ]];then
+    delete_environment $envName    
+    if [[ ${chaos_infra_id} == "" ]];then
         echo -e "\n[Info]: litmusctl disconnect chaos-infra working fine ✓\n"
     else 
         echo -e "\n[Error]: litmusctl disconnect chaos-infra not working as expected\n"
