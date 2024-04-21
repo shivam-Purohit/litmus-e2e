@@ -122,7 +122,8 @@ jobs:
           INSTALLATION_MODE: "NS-MODE"
           ACCESS_URL: ${{ env.URL }}
           PROJECT_NAME: "admin's project"
-
+          ENVIRONMENT_NAME: "testenv"
+          
       - name: Running Litmusctl CLI tests (litmusctl disconnect chaos-infra)
         run: |
           chmod 755 ./litmus/litmusctl_tests.sh
@@ -343,7 +344,8 @@ jobs:
           INSTALLATION_MODE: "CS-MODE"
           ACCESS_URL: ${{ env.URL }}
           PROJECT_NAME: "admin's project"
-
+          ENVIRONMENT_NAME: "testenv"
+          
       - name: Running Litmusctl CLI tests (litmusctl disconnect chaos-infra)
         run: |
           chmod 755 ./litmus/litmusctl_tests.sh
