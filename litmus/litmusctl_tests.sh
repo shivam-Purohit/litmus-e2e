@@ -357,7 +357,7 @@ function test_delete_environment(){
     projectID=$(echo "q" | litmusctl get projects | grep "${projectName}" |  awk '{print $1}')
     printf "\n project id is ${projectID}"
 
-    echo "yes" | litmusctl delete chaos-environment --project-id=$projectID --environment-id=$envName
+    echo "y" | litmusctl delete chaos-environment --project-id=$projectID --environment-id=$envName
     # get environment
     noOfEnvs=$(echo "q" | litmusctl get chaos-environments --project-id=$projectID | wc -l)
     if [[ ${noOfEnvs} -lt 1 ]];then
