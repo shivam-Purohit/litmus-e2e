@@ -179,7 +179,9 @@ function test_install_with_nodeSelectors() {
     do
         verify_deployment_nodeselector ${i} ${namespace} '{"beta.kubernetes.io/arch":"amd64"}'
     done
-
+    
+    projectID=$(echo "q" | litmusctl get projects | grep "${projectName}" | awk '{print $1}')
+    disconnect_infra ${infraName} $projectID
     infra_cleanup
     delete_environment $envName
 }
@@ -195,7 +197,9 @@ function test_install_with_tolerations() {
     do
         verify_deployment_tolerations ${i} ${namespace} '[{"effect":"NoSchedule","key":"special","operator":"Equal","value":"true"}]' 
     done
-
+    
+    projectID=$(echo "q" | litmusctl get projects | grep "${projectName}" | awk '{print $1}')
+    disconnect_infra ${infraName} $projectID
     infra_cleanup
     delete_environment $envName
 }
