@@ -308,12 +308,12 @@ function test_disconnect_infra() {
 function test_create_environment(){
     configure_account
 
-    projectID=$(echo "q" | ../litmusctl get projects | grep "${projectName}" |  awk '{print $1}')
+    projectID=$(echo "q" | litmusctl get projects | grep "${projectName}" |  awk '{print $1}')
     printf "\n project id is ${projectID}"
     # create a environment
  
     litmusctl create chaos-environment --project-id=$projectID --name=$envName
-    noOfEnvs=$(echo "q" | litmusctl list chaos-environments --project-id=$projectID | wc -l)
+    noOfEnvs=$(echo "q" | litmusctl get chaos-environments --project-id=$projectID | wc -l)
     printf "\n No of Environments are ${noOfEnvs}"
         
     if [[ ${noOfEnvs} -gt 1 ]];then
