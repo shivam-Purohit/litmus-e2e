@@ -91,6 +91,7 @@ jobs:
           ACCESS_URL: ${{ env.URL }}
           AGENT_NAME: "agent-2"
           PROJECT_NAME: "admin's project"
+          ENVIRONMENT_NAME: "testenv"
 
       - name: Running Litmusctl CLI tests (Natively Configured)
         run: |
@@ -102,7 +103,8 @@ jobs:
           ACCESS_URL: ${{ env.URL }}
           AGENT_NAME: "agent-3"
           PROJECT_NAME: "admin's project"
-
+          ENVIRONMENT_NAME: "testenv"
+          
       - name: Running Litmusctl CLI tests (litmusctl get projects)
         run: |
           chmod 755 ./litmus/litmusctl_tests.sh
@@ -322,6 +324,7 @@ jobs:
           ACCESS_URL: ${{ env.URL }}
           AGENT_NAME: "agent-3"
           PROJECT_NAME: "admin's project"
+          ENVIRONMENT_NAME: "testenv"
 
       - name: Running Litmusctl CLI tests (litmusctl get projects)
         run: |
