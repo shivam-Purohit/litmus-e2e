@@ -207,10 +207,12 @@ function test_install_with_tolerations() {
 
 function test_native() {
     configure_account
-
+    create_environment $envName
     configure_infra "" ""
-
+    projectID=$(echo "q" | litmusctl get projects | grep "${projectName}" | awk '{print $1}')
+    disconnect_infra ${infraName} $projectID
     infra_cleanup
+    delete_environment $envName
 }
 
 function test_get_projects(){
