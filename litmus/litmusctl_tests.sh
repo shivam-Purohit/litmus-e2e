@@ -21,7 +21,8 @@ envName=${ENVIRONMENT_NAME}
 expName=${EXPERIMENT_NAME} 
 
 components="subscriber,chaos-exporter,chaos-operator-ce,event-tracker,workflow-controller"
-defaultTolerations='[{"tolerationSeconds":0,"key":"special","value":"true","Operator":"Equal","effect":"NoSchedule"}]'
+# defaultTolerations='[{"tolerationSeconds":0,"key":"special","value":"true","Operator":"Equal","effect":"NoSchedule"}]'
+defaultTolerations='[{"key":"special","value":"true","Operator":"Equal","effect":"NoSchedule"}]'
 defaultNodeSelectors='beta.kubernetes.io/arch=amd64'
 
 
