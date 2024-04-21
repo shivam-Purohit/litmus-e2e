@@ -121,6 +121,7 @@ jobs:
         env:
           INSTALLATION_MODE: "NS-MODE"
           ACCESS_URL: ${{ env.URL }}
+          AGENT_NAME: "agent-3"
           PROJECT_NAME: "admin's project"
           ENVIRONMENT_NAME: "testenv"
           
@@ -343,6 +344,7 @@ jobs:
         env:
           INSTALLATION_MODE: "CS-MODE"
           ACCESS_URL: ${{ env.URL }}
+          AGENT_NAME: "agent-3"
           PROJECT_NAME: "admin's project"
           ENVIRONMENT_NAME: "testenv"
           
