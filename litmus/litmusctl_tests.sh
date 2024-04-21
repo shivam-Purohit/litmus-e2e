@@ -195,8 +195,9 @@ function test_install_with_tolerations() {
     do
         verify_deployment_tolerations ${i} ${namespace} '[{"effect":"NoSchedule","key":"special","operator":"Equal","value":"true"}]' 
     done
-    delete_environment $envName
+
     infra_cleanup
+    delete_environment $envName
 }
 
 function test_native() {
