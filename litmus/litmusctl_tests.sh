@@ -48,7 +48,6 @@ function configure_infra(){
     echo "projectID obtained is ${projectID}"
     # create a environment for the installation of infra
 
-    create_environment $envName
     
     if [[ "$installation_mode" == "NS-MODE" ]];then
 
@@ -171,7 +170,7 @@ function wait_experiment_run_status() {
 
 function test_install_with_nodeSelectors() {
     configure_account
-
+    create_environment $envName
     configure_infra $defaultNodeSelectors ""
     
     echo "Verifying nodeSelectors in all required Deployments"
@@ -182,11 +181,12 @@ function test_install_with_nodeSelectors() {
     done
 
     infra_cleanup
+    delete_environment $envName
 }
 
 function test_install_with_tolerations() {
     configure_account
-
+    create_environment $envName
     configure_infra "" $defaultTolerations
 
     echo "Verifying tolerations in all required Deployments"
@@ -195,7 +195,7 @@ function test_install_with_tolerations() {
     do
         verify_deployment_tolerations ${i} ${namespace} '[{"effect":"NoSchedule","key":"special","operator":"Equal","value":"true"}]' 
     done
-
+    delete_environment $envName
     infra_cleanup
 }
 
