@@ -337,7 +337,7 @@ function test_get_environment(){
     create_environment $envName
 
     # get newly created environment
-    noOfEnvs=$(echo "q" | litmusctl list chaos-environments --project-id=$projectID | wc -l)
+    noOfEnvs=$(echo "q" | litmusctl get chaos-environments --project-id=$projectID | wc -l)
 
     echo $noOfEnvs
     if [[ ${noOfEnvs} -gt 0 ]];then
@@ -359,7 +359,7 @@ function test_delete_environment(){
 
     echo "yes" | litmusctl delete chaos-environment --project-id=$projectID --environment-id=$envName
     # get environment
-    noOfEnvs=$(echo "q" | litmusctl list chaos-environments --project-id=$projectID | wc -l)
+    noOfEnvs=$(echo "q" | litmusctl get chaos-environments --project-id=$projectID | wc -l)
     if [[ ${noOfEnvs} -lt 1 ]];then
         echo -e "\n[Info]: litmusctl delete chaos-environment working fine ✓\n"
         exit 0
