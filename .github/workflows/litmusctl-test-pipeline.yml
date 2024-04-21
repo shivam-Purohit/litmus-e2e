@@ -160,7 +160,7 @@ jobs:
           ACCESS_URL: ${{ env.URL }}
           AGENT_NAME: "agent-5"
           PROJECT_NAME: "admin's project"
-          ENVIRONMENT_NAME: "custom-chaos-workflow-163655431"
+          ENVIRONMENT_NAME: "testenv"
 
       - name: Running Litmusctl CLI tests (litmusctl delete chaos-enviroment)
         run: |
@@ -172,7 +172,7 @@ jobs:
           ACCESS_URL: ${{ env.URL }}
           AGENT_NAME: "agent-5"
           PROJECT_NAME: "admin's project"
-          ENVIRONMENT_NAME: "custom-chaos-workflow-163655431"
+          ENVIRONMENT_NAME: "testenv"
   
       - name: Running Litmusctl CLI tests (litmusctl save chaos-experiment)
         run: |
