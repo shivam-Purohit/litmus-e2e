@@ -160,7 +160,7 @@ jobs:
           ACCESS_URL: ${{ env.URL }}
           AGENT_NAME: "agent-5"
           PROJECT_NAME: "admin's project"
-          ENVIRONMENT_NAME: "testenv"
+          ENVIRONMENT_NAME: "custom-chaos-workflow-163655431"
 
       - name: Running Litmusctl CLI tests (litmusctl delete chaos-enviroment)
         run: |
@@ -172,7 +172,7 @@ jobs:
           ACCESS_URL: ${{ env.URL }}
           AGENT_NAME: "agent-5"
           PROJECT_NAME: "admin's project"
-          ENVIRONMENT_NAME: "testenv"
+          ENVIRONMENT_NAME: "custom-chaos-workflow-163655431"
   
       - name: Running Litmusctl CLI tests (litmusctl save chaos-experiment)
         run: |
@@ -185,7 +185,7 @@ jobs:
           AGENT_NAME: "agent-5"
           PROJECT_NAME: "admin's project"
           ENVIRONMENT_NAME: "testenv"
-          EXPERIMENT_NAME: "testexp"
+          EXPERIMENT_NAME: "custom-chaos-workflow-163655431"
 
       - name: Running Litmusctl CLI tests (litmusctl get chaos-experiments)
         run: |
@@ -198,7 +198,7 @@ jobs:
           AGENT_NAME: "agent-5"
           PROJECT_NAME: "admin's project"
           ENVIRONMENT_NAME: "testenv"
-          EXPERIMENT_NAME: "testexp"
+          EXPERIMENT_NAME: "custom-chaos-workflow-163655431"
 
       - name: Running Litmusctl CLI tests (litmusctl delete chaos-experiment)
         run: |
@@ -211,7 +211,7 @@ jobs:
           AGENT_NAME: "agent-5"
           PROJECT_NAME: "admin's project"
           ENVIRONMENT_NAME: "testenv"
-          EXPERIMENT_NAME: "testexp"
+          EXPERIMENT_NAME: "custom-chaos-workflow-163655431"
 
       - name: Running Litmusctl CLI tests (litmusctl run chaos-experiment)
         run: |
@@ -237,7 +237,7 @@ jobs:
           AGENT_NAME: "agent-5"
           PROJECT_NAME: "admin's project"
           ENVIRONMENT_NAME: "testenv"
-          EXPERIMENT_NAME: "testexp"
+          EXPERIMENT_NAME: "custom-chaos-workflow-163655431"
 
 
   Cluster-Scope-Mode:
@@ -410,7 +410,7 @@ jobs:
           AGENT_NAME: "agent-5"
           PROJECT_NAME: "admin's project"
           ENVIRONMENT_NAME: "testenv"
-          EXPERIMENT_NAME: "testexp"
+          EXPERIMENT_NAME: "custom-chaos-workflow-163655431"
 
       - name: Running Litmusctl CLI tests (litmusctl get chaos-experiments)
         run: |
@@ -423,7 +423,7 @@ jobs:
           AGENT_NAME: "agent-5"
           PROJECT_NAME: "admin's project"
           ENVIRONMENT_NAME: "testenv"
-          EXPERIMENT_NAME: "testexp"
+          EXPERIMENT_NAME: "custom-chaos-workflow-163655431"
 
       - name: Running Litmusctl CLI tests (litmusctl delete chaos-experiment)
         run: |
@@ -436,7 +436,7 @@ jobs:
           AGENT_NAME: "agent-5"
           PROJECT_NAME: "admin's project"
           ENVIRONMENT_NAME: "testenv"
-          EXPERIMENT_NAME: "testexp"
+          EXPERIMENT_NAME: "custom-chaos-workflow-163655431"
 
       - name: Running Litmusctl CLI tests (litmusctl run chaos-experiment)
         run: |
@@ -449,7 +449,7 @@ jobs:
           AGENT_NAME: "agent-5"
           PROJECT_NAME: "admin's project"
           ENVIRONMENT_NAME: "testenv"
-          EXPERIMENT_NAME: "testexp"
+          EXPERIMENT_NAME: "custom-chaos-workflow-163655431"
 
       - name: Running Litmusctl CLI tests (litmusctl get chaos-experiment-runs)
         run: |
@@ -462,4 +462,4 @@ jobs:
           AGENT_NAME: "agent-5"
           PROJECT_NAME: "admin's project"
           ENVIRONMENT_NAME: "testenv"
-          EXPERIMENT_NAME: "testexp"
+          EXPERIMENT_NAME: "custom-chaos-workflow-163655431"
