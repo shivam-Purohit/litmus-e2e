@@ -232,9 +232,13 @@ function test_get_projects(){
 
 function test_get_infras(){
     configure_account
-
+    
+    create_environment $envName
+    configure_infra "" ""
+     
     projectID=$(echo "q" | litmusctl get projects | grep "${projectName}" |  awk '{print $1}')
-
+    # before that we would need to create environment
+    
     configure_infra "" ""
     # we will need to create a infra before testing for get 
     # otherwise it will fail
@@ -242,6 +246,10 @@ function test_get_infras(){
     noOfInfras=$(litmusctl get chaos-infra --project-id=$projectID | wc -l)
         printf "\n No of infras is ${noOfInfras}"
         printf "\n project id is ${projectID}"
+
+    disconnect_infra ${infraName} $projectID
+    infra_cleanup
+    delete_environment $envName
     if [[ ${noOfInfras} -gt 1 ]];then
         echo -e "\n[Info]: litmusctl get chaos-infra working fine ✓\n"
         exit 0
