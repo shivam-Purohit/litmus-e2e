@@ -132,6 +132,8 @@ spec:
                   generateName: pod-delete
                   labels:
                     instance_id: 09d739fb-544d-401d-9862-db76c835b5ea
+                  annotations:
+                    probeRef: '[{"name":"shivamprobe2","mode":"SOT"}]'
                 spec:
                   appinfo:
                     appns: default
