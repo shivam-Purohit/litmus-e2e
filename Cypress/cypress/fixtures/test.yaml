@@ -6,6 +6,9 @@ metadata:
   labels:
     subject: custom-chaos-workflow_litmus
 spec:
+  workflowMetadata:
+    labels:
+      subject: "{{workflow.parameters.adminModeNamespace}}_kube-proxy"
   arguments:
     parameters:
       - name: adminModeNamespace
