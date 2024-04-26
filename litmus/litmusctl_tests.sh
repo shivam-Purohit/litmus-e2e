@@ -134,7 +134,7 @@ function save_experiment(){
 
     # wait for the infra to be activated
     wait_infra_to_activate $infraName $projectID 
-    yq eval '.metadata.name = "{expName}"' Cypress/cypress/fixtures/test.yaml 
+    yq eval '.metadata.name = "${expName}"' Cypress/cypress/fixtures/test.yaml 
     litmusctl save chaos-experiment --file="Cypress/cypress/fixtures/test.yaml" --project-id=${projectID} --chaos-infra-id=$infraID --description="test experiment"
 }
 
@@ -376,7 +376,7 @@ function test_save_experiment(){
    sudo apt-get install yq 
 
     yq --version
-    yq eval '.metadata.name = "{expName}"' Cypress/cypress/fixtures/test.yaml 
+    yq eval '.metadata.name = "${expName}"' Cypress/cypress/fixtures/test.yaml 
     # create environment and infra to save experiment
     create_environment $envName
     configure_infra "" ""
