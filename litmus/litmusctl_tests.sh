@@ -189,6 +189,10 @@ function test_install_with_nodeSelectors() {
 }
 
 function test_install_with_tolerations() {
+    echo "E" | add-apt-repository ppa:rmescandon/yq
+    apt-get install yq 
+
+    yq --version
     configure_account
     create_environment $envName
     configure_infra "" $defaultTolerations
