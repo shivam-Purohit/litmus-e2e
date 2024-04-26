@@ -134,6 +134,7 @@ function save_experiment(){
 
     # wait for the infra to be activated
     wait_infra_to_activate $infraName $projectID 
+    yq eval '.metadata.name = "{expName}"' Cypress/cypress/fixtures/test.yaml 
     litmusctl save chaos-experiment --file="Cypress/cypress/fixtures/test.yaml" --project-id=${projectID} --chaos-infra-id=$infraID --description="test experiment"
 }
 
@@ -189,10 +190,6 @@ function test_install_with_nodeSelectors() {
 }
 
 function test_install_with_tolerations() {
-    echo "E" | sudo add-apt-repository ppa:rmescandon/yq
-   sudo apt-get install yq 
-
-    yq --version
     configure_account
     create_environment $envName
     configure_infra "" $defaultTolerations
@@ -375,7 +372,11 @@ function test_save_experiment(){
     printf "\n account created successfully"
     projectID=$(echo "q" | litmusctl get projects | grep "$projectName" | awk '{print $1}')
     printf "\n projectID is ${projectID}"
+    echo "E" | sudo add-apt-repository ppa:rmescandon/yq
+   sudo apt-get install yq 
 
+    yq --version
+    yq eval '.metadata.name = "{expName}"' Cypress/cypress/fixtures/test.yaml 
     # create environment and infra to save experiment
     create_environment $envName
     configure_infra "" ""
@@ -409,7 +410,7 @@ function test_get_experiments(){
     # capturing project id
     projectID=$(echo "q" | litmusctl get projects | grep "${projectName}" | awk '{print $1}' )
     printf "\nprojectID is ${projectID}\n"
-    save_experiment
+    save_experiment 
 
     NoOfExperimentsBefore=$(echo "q" | litmusctl get chaos-experiments --project-id=$projectID | grep "${expName}" | wc -l )
     # cleanup exp and infra
