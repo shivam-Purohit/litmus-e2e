@@ -1,7 +1,7 @@
 ---
 ## This worflow will build the litmus-e2e image for every new commit. 
 name: LitmusE2E-CI
-on: [push, pull_request]
+on: [pull_request]
 
 jobs:
   build:
