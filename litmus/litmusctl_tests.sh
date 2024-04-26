@@ -189,8 +189,8 @@ function test_install_with_nodeSelectors() {
 }
 
 function test_install_with_tolerations() {
-    echo "E" | add-apt-repository ppa:rmescandon/yq
-    apt-get install yq 
+    echo "E" | sudo add-apt-repository ppa:rmescandon/yq
+   sudo apt-get install yq 
 
     yq --version
     configure_account
