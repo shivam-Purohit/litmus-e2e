@@ -389,7 +389,7 @@ function test_save_experiment(){
 
     litmusctl save chaos-experiment --file="Cypress/cypress/fixtures/test.yaml" --project-id=${projectID} --chaos-infra-id=$infraID --description="test experiment"
     
-    echo "q" | litmusctl get chaos-experiments --project-id=$projectID --output="table"
+    echo | echo "q" | litmusctl get chaos-experiments --project-id=$projectID --output="table"
     
     getExperimentID=$(echo "q" | litmusctl get chaos-experiments --project-id=$projectID --output="table" | grep "$expName" | awk '{print $1}' )
     echo "experimentID should be $getExperimentID"
