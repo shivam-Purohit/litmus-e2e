@@ -390,7 +390,7 @@ function test_save_experiment(){
     litmusctl save chaos-experiment --file="Cypress/cypress/fixtures/test.yaml" --project-id=${projectID} --chaos-infra-id=$infraID --description="test experiment"
 
     getExperimentID=$(echo "q" | litmusctl get chaos-experiments --output="table" --project-id=$projectID | grep "$expName" | awk '{print $1}' )
-    printf $getExperimentID
+    echo "$getExperimentID"
     # cleanup exp and infra
     disconnect_infra ${infraName} $projectID
     infra_cleanup
@@ -420,7 +420,7 @@ function test_get_experiments(){
     delete_environment $envName
     delete_experiment $expName
     NoOfExperimentsAfter=$(echo "q" | litmusctl get chaos-experiments --project-id=$projectID | grep "${expName}" | wc -l )
-    printf $NoOfExperiments
+    echo "$NoOfExperiments"
     if [[ ${NoOfExperimentsBefore} -ge 1 ]] && [[ ${NoOfExperimentsAfter} -eq 0 ]]; then
         echo -e "\n[Info]: litmusctl get chaos-experiments working fine ✓\n"
         exit 0
@@ -448,7 +448,7 @@ function test_delete_experiment(){
     disconnect_infra ${infraName} $projectID
     infra_cleanup
     delete_environment $envName
-    printf $NoOfExperiments
+    echo "$NoOfExperiments"
     if [[ ${NoOfExperiments} -eq 0 ]];then
         echo -e "\n[Info]: litmusctl delete chaos-experiment working fine ✓\n"
         exit 0
@@ -480,7 +480,7 @@ function test_run_experiment(){
     infra_cleanup
     delete_environment $envName
     delete_experiment $expName
-    printf $status
+    echo "$status"
     if [[ "${status}" = "RUNNING" ]];then
         echo -e "\n[Info]: litmusctl run chaos-experiment working fine ✓\n"
         exit 0
@@ -511,7 +511,7 @@ function test_get_experiment_run(){
     infra_cleanup
     delete_environment $envName
     delete_experiment $expName
-    printf $NoOfExperimentsRun
+    echo "$NoOfExperimentsRun"
     if [[ $NoOfExperimentsRun -ge 1 ]];then
         echo -e "\n[Info]: litmusctl get chaos-experiment-runs working fine ✓\n"
         exit 0
