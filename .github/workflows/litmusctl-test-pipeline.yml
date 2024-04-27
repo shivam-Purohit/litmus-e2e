@@ -185,7 +185,7 @@ jobs:
           AGENT_NAME: "agent-5"
           PROJECT_NAME: "admin's project"
           ENVIRONMENT_NAME: "testenv"
-          EXPERIMENT_NAME: "testexperiment1"
+          EXPERIMENT_NAME: "testexperimenta"
 
       - name: Running Litmusctl CLI tests (litmusctl get chaos-experiments)
         run: |
@@ -198,7 +198,7 @@ jobs:
           AGENT_NAME: "agent-5"
           PROJECT_NAME: "admin's project"
           ENVIRONMENT_NAME: "testenv"
-          EXPERIMENT_NAME: "testexperiment2"
+          EXPERIMENT_NAME: "testexperimentb"
 
       - name: Running Litmusctl CLI tests (litmusctl delete chaos-experiment)
         run: |
@@ -211,7 +211,7 @@ jobs:
           AGENT_NAME: "agent-5"
           PROJECT_NAME: "admin's project"
           ENVIRONMENT_NAME: "testenv"
-          EXPERIMENT_NAME: "testexperimen3"
+          EXPERIMENT_NAME: "testexperimenc"
 
       - name: Running Litmusctl CLI tests (litmusctl run chaos-experiment)
         run: |
@@ -224,7 +224,7 @@ jobs:
           AGENT_NAME: "agent-5"
           PROJECT_NAME: "admin's project"
           ENVIRONMENT_NAME: "testenv"
-          EXPERIMENT_NAME: "testexperiment4"
+          EXPERIMENT_NAME: "testexperimentd"
 
       - name: Running Litmusctl CLI tests (litmusctl get chaos-experiment-runs)
         run: |
@@ -237,7 +237,7 @@ jobs:
           AGENT_NAME: "agent-5"
           PROJECT_NAME: "admin's project"
           ENVIRONMENT_NAME: "testenv"
-          EXPERIMENT_NAME: "testexperiment5"
+          EXPERIMENT_NAME: "testexperimente"
 
 
   Cluster-Scope-Mode:
@@ -410,7 +410,7 @@ jobs:
           AGENT_NAME: "agent-5"
           PROJECT_NAME: "admin's project"
           ENVIRONMENT_NAME: "testenv"
-          EXPERIMENT_NAME: "testexperiment1"
+          EXPERIMENT_NAME: "testexperimenta"
 
       - name: Running Litmusctl CLI tests (litmusctl get chaos-experiments)
         run: |
@@ -423,7 +423,7 @@ jobs:
           AGENT_NAME: "agent-5"
           PROJECT_NAME: "admin's project"
           ENVIRONMENT_NAME: "testenv"
-          EXPERIMENT_NAME: "testexperiment2"
+          EXPERIMENT_NAME: "testexperimentb"
 
       - name: Running Litmusctl CLI tests (litmusctl delete chaos-experiment)
         run: |
@@ -436,7 +436,7 @@ jobs:
           AGENT_NAME: "agent-5"
           PROJECT_NAME: "admin's project"
           ENVIRONMENT_NAME: "testenv"
-          EXPERIMENT_NAME: "testexperiment3"
+          EXPERIMENT_NAME: "testexperimentc"
 
       - name: Running Litmusctl CLI tests (litmusctl run chaos-experiment)
         run: |
@@ -449,7 +449,7 @@ jobs:
           AGENT_NAME: "agent-5"
           PROJECT_NAME: "admin's project"
           ENVIRONMENT_NAME: "testenv"
-          EXPERIMENT_NAME: "testexperiment4"
+          EXPERIMENT_NAME: "testexperimentd"
 
       - name: Running Litmusctl CLI tests (litmusctl get chaos-experiment-runs)
         run: |
@@ -462,4 +462,4 @@ jobs:
           AGENT_NAME: "agent-5"
           PROJECT_NAME: "admin's project"
           ENVIRONMENT_NAME: "testenv"
-          EXPERIMENT_NAME: "testexperiment5"
+          EXPERIMENT_NAME: "testexperimente"
