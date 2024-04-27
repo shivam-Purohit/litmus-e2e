@@ -374,8 +374,8 @@ function test_save_experiment(){
     projectID=$(echo "q" | litmusctl get projects | grep "$projectName" | awk '{print $1}')
     printf "\n projectID is ${projectID}"
     echo "E" | sudo add-apt-repository ppa:rmescandon/yq
-   sudo apt-get install yq 
-
+    sudo apt-get install yq 
+    echo | echo "q" | litmusctl get chaos-experiments --project-id=$projectID --output="table"
     yq --version
     nameexperiment=$expName yq eval '.metadata.name=env(nameexperiment)' Cypress/cypress/fixtures/test.yaml
     # create environment and infra to save experiment
