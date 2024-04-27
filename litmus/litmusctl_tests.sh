@@ -136,7 +136,7 @@ function save_experiment(){
     wait_infra_to_activate $infraName $projectID 
     nameexperiment=$expName yq eval '.metadata.name=env(nameexperiment)' Cypress/cypress/fixtures/test.yaml
 
-    litmusctl save chaos-experiment --file="Cypress/cypress/fixtures/test.yaml" --project-id=${projectID} --chaos-infra-id=$infraID --description="test experiment"
+    litmusctl save chaos-experiment --file="Cypress/cypress/fixtures/test.yaml" --project-id=${projectID} --chaos-infra-id=$infraID --description="$expName"
 }
 
 function delete_experiment(){
@@ -387,7 +387,7 @@ function test_save_experiment(){
     # wait for the infra to be activated
     wait_infra_to_activate $infraName $projectID 
 
-    litmusctl save chaos-experiment --file="Cypress/cypress/fixtures/test.yaml" --project-id=${projectID} --chaos-infra-id=$infraID --description="test experiment"
+    litmusctl save chaos-experiment --file="Cypress/cypress/fixtures/test.yaml" --project-id=${projectID} --chaos-infra-id=$infraID --description="$expName"
     
     echo | echo "q" | litmusctl get chaos-experiments --project-id=$projectID --output="table"
     
