@@ -388,9 +388,12 @@ function test_save_experiment(){
     wait_infra_to_activate $infraName $projectID 
 
     litmusctl save chaos-experiment --file="Cypress/cypress/fixtures/test.yaml" --project-id=${projectID} --chaos-infra-id=$infraID --description="test experiment"
-
+    
+    echo "q" | litmusctl get chaos-experiments --output="table" --project-id=$projectID
+    
     getExperimentID=$(echo "q" | litmusctl get chaos-experiments --output="table" --project-id=$projectID | grep "$expName" | awk '{print $1}' )
-    echo "$getExperimentID"
+    echo "experimentID should be $getExperimentID"
+    echo "expName is $expName"
     # cleanup exp and infra
     disconnect_infra ${infraName} $projectID
     infra_cleanup
