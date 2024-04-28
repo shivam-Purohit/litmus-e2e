@@ -386,7 +386,7 @@ function test_save_experiment(){
 
     # wait for the infra to be activated
     wait_infra_to_activate $infraName $projectID 
-
+    yq eval '.metadata.name'
     litmusctl save chaos-experiment --file="Cypress/cypress/fixtures/test.yaml" --project-id=${projectID} --chaos-infra-id=$infraID --description="$expName"
     
     echo | echo "q" | litmusctl get chaos-experiments --project-id=$projectID --output="table"
