@@ -474,6 +474,8 @@ function test_run_experiment(){
     save_experiment
     printf "\nexperiment id should have been ${expName}"
     # run experiment here
+    echo "q" | litmusctl get projects
+    echo "q" | litmusctl get chaos-experiments  --project-id=${projectID} --output="table"
     litmusctl run chaos-experiment --project-id=$projectID --experiment-id=$expName
 
     # get the experiment-run
