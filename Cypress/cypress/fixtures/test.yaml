@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Workflow
 metadata:
-  name: testexperiment
+  name: newexperiment
   namespace: litmus
   labels:
     subject: custom-chaos-workflow_litmus
