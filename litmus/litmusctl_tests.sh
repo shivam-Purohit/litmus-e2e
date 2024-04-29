@@ -19,6 +19,7 @@ envName="testenv1"
 envName=${ENVIRONMENT_NAME}
 # experiment name should be same as defined in the yaml
 expName=${EXPERIMENT_NAME} 
+probeName=${PROBE_NAME}
 
 components="subscriber,chaos-exporter,chaos-operator-ce,event-tracker,workflow-controller"
 # defaultTolerations='[{"tolerationSeconds":0,"key":"special","value":"true","Operator":"Equal","effect":"NoSchedule"}]'
@@ -386,6 +387,23 @@ function test_save_experiment(){
 
     # wait for the infra to be activated
     wait_infra_to_activate $infraName $projectID 
+
+    # make the api call to create a http probe probe as we dont have a create  command yet
+    tokenValue=$(litmusctl config view | grep "token" | awk 'NR==2 {print $2}')
+    echo "tokenValue is $tokenValue"
+    endpointValue=$(litmusctl config view | grep "endpoint" | awk 'NR==2 {print $2}')
+    echo "tokenValue is $tokenValue"
+
+    curl ''"$endpointValue"'/api/query' \
+    -H 'Accept-Encoding: gzip, deflate, br' \
+    -H 'Content-Type: application/json' \
+    -H 'Accept: application/json' \
+    -H 'Connection: keep-alive' \
+    -H 'DNT: 1' \
+    -H 'Authorization: Bearer '"$tokenValue"' ' \
+    --data-binary '{"query":"mutation createProbe($request: ProbeRequest!, $projectID: ID!) {\n\t\taddProbe(request: $request, projectID: $projectID){\n\t\t\tname\n\t\t}\n}","variables":{"projectID":"'$projectID'","request":{"name":"'$probeName'","description":"new probe for testing","type":"httpProbe","infrastructureType":"Kubernetes","tags":[],"kubernetesHTTPProperties":{"probeTimeout":"1s","interval":"1s","url":"something.com","method":{"get":{"criteria":"==","responseCode":"200"}}}}}}' \
+    --compressed
+
     yq eval '.metadata.name'
     litmusctl save chaos-experiment --file="Cypress/cypress/fixtures/test.yaml" --project-id=${projectID} --chaos-infra-id=$infraID --description="$expName"
     
