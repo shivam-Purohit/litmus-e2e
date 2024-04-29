@@ -186,6 +186,7 @@ jobs:
           PROJECT_NAME: "admin's project"
           ENVIRONMENT_NAME: "testenv"
           EXPERIMENT_NAME: "testexperimenta"
+          PROBE_NAME: "testprobeshivam"
 
       - name: Running Litmusctl CLI tests (litmusctl get chaos-experiments)
         run: |
@@ -411,6 +412,7 @@ jobs:
           PROJECT_NAME: "admin's project"
           ENVIRONMENT_NAME: "testenv"
           EXPERIMENT_NAME: "testexperimenta"
+          PROBE_NAME: "testprobeshivam"
 
       - name: Running Litmusctl CLI tests (litmusctl get chaos-experiments)
         run: |
