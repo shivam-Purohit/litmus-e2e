@@ -154,10 +154,12 @@ function wait_experiment_run_status() {
   projectID=$(echo "q" | litmusctl get projects | grep "${projectName}" | awk '{print $1}')
 
   # Capture experiment run status (assuming output has one line)
+  echo "q" | litmusctl get chaos-experiment-runs --project-id=$projectID --experiment-id=$expName
   ExperimentRunStatus=$(echo "q" | litmusctl get chaos-experiment-runs --project-id=$projectID --experiment-id=$expName | grep "${expName}" | awk '{print $1}' )
 
   while [[ "$ExperimentRunStatus" != "Running" ]]; do
-    echo "\n...waiting for the Experiment Status...\n"
+    echo "...waiting for the Experiment Status..."
+    echo "$ExperimentRunStatus"
     wait_time=$((wait_time - 10))
     if [[ $wait_time -eq 0 ]]; then
       echo -e "\n[Error]: Experiment failed to start"
@@ -168,6 +170,7 @@ function wait_experiment_run_status() {
     ExperimentRunStatus=$(echo "q" | litmusctl get chaos-experiment-runs --project-id=$projectID --experiment-id=$expName | grep "${expName}" | awk '{print $1}' )
   done
   echo "\n...Experiment Status is $ExperimentRunStatus \n"
+  echo "q" | litmusctl get chaos-experiment-runs --project-id=$projectID --experiment-id=$expName
   return 0
 }
 
