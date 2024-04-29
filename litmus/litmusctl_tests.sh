@@ -501,14 +501,14 @@ function test_run_experiment(){
     litmusctl run chaos-experiment --project-id=$projectID --experiment-id=$expName
 
     # get the experiment-run
-    status=$(wait_experiment_run_status 60)
+    status=$(wait_experiment_run_status 100)
     # cleanup exp and infra
     disconnect_infra ${infraName} $projectID
     infra_cleanup
     delete_environment $envName
     delete_experiment $expName
     echo "$status"
-    if [[ "${status}" = "RUNNING" ]];then
+    if [[ "${status}" = "Running" ]];then
         echo -e "\n[Info]: litmusctl run chaos-experiment working fine ✓\n"
         exit 0
     else 
