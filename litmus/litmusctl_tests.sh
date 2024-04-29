@@ -389,9 +389,10 @@ function test_save_experiment(){
     wait_infra_to_activate $infraName $projectID 
 
     # make the api call to create a http probe probe as we dont have a create  command yet
-    tokenValue=$(litmusctl config view | grep "token" | awk 'NR==2 {print $2}')
+    litmusctl config view
+    tokenValue=$(litmusctl config view | grep "token" | awk '{print $2}')
     echo "tokenValue is $tokenValue"
-    endpointValue=$(litmusctl config view | grep "endpoint" | awk 'NR==2 {print $2}')
+    endpointValue=$(litmusctl config view | grep "endpoint" | awk '{print $2}')
     echo "tokenValue is $tokenValue"
 
     curl ''"$endpointValue"'/api/query' \
