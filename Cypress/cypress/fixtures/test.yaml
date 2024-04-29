@@ -119,7 +119,8 @@ spec:
                   namespace: "{{workflow.parameters.adminModeNamespace}}"
                   labels:
                     context: "{{workflow.parameters.appNamespace}}_kube-proxy"
-                  annotations: {}
+                  annotations: 
+                    probeRef: '[{"name":"testprobeshivam","mode":"SOT"}]'
                 spec:
                   appinfo:
                     appns: kube-system
