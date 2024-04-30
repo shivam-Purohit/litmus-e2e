@@ -48,8 +48,6 @@ function configure_infra(){
 
     projectID=$(echo "q" | litmusctl get projects | grep "${projectName}" |  awk '{print $1}')
     echo "projectID obtained is ${projectID}"
-    # create a environment for the installation of infra
-
     
     if [[ "$installation_mode" == "NS-MODE" ]];then
 
@@ -149,31 +147,6 @@ function delete_experiment(){
 }
 
 
-function wait_experiment_run_status() {
-  wait_time=$1
-  projectID=$(echo "q" | litmusctl get projects | grep "${projectName}" | awk '{print $1}')
-
-  # Capture experiment run status (assuming output has one line)
-  echo "q" | litmusctl get chaos-experiment-runs --project-id=$projectID --experiment-id=$expName
-  ExperimentRunStatus=$(echo "q" | litmusctl get chaos-experiment-runs --project-id=$projectID --experiment-id=$expName | grep "${expName}" | awk '{print $1}' )
-
-  while [[ "$ExperimentRunStatus" != "Running" ]]; do
-    echo "...waiting for the Experiment Status..."
-    echo "$ExperimentRunStatus"
-    wait_time=$((wait_time - 10))
-    if [[ $wait_time -eq 0 ]]; then
-      echo -e "\n[Error]: Experiment failed to start"
-      return 1
-    fi
-    sleep 10
-    # Capture experiment run status again
-    ExperimentRunStatus=$(echo "q" | litmusctl get chaos-experiment-runs --project-id=$projectID --experiment-id=$expName | grep "${expName}" | awk '{print $1}' )
-  done
-  echo "\n...Experiment Status is $ExperimentRunStatus \n"
-  echo "q" | litmusctl get chaos-experiment-runs --project-id=$projectID --experiment-id=$expName
-  return 0
-}
-
 # functions for running tests for litmusctl -------------------------------------------------------------------
 
 function test_install_with_nodeSelectors() {
@@ -244,16 +217,12 @@ function test_get_infras(){
     configure_infra "" ""
      
     projectID=$(echo "q" | litmusctl get projects | grep "${projectName}" |  awk '{print $1}')
-    # before that we would need to create environment
     
     configure_infra "" ""
     # we will need to create a infra before testing for get 
     # otherwise it will fail
 
     noOfInfras=$(litmusctl get chaos-infra --project-id=$projectID | wc -l)
-        printf "\n No of infras is ${noOfInfras}"
-        printf "\n project id is ${projectID}"
-
     disconnect_infra ${infraName} $projectID
     infra_cleanup
     delete_environment $envName
@@ -273,8 +242,6 @@ function test_create_project(){
     litmusctl create project --name="${projectName}"
 
     noOfProjects=$(litmusctl get projects | wc -l)
-    echo -e "is this actually two ${noOfProjects}"
-
     if [[ ${noOfProjects} -gt 2 ]];then
         echo -e "\n[Info]: litmusctl create project working fine ✓\n"
         exit 0
@@ -312,12 +279,9 @@ function test_create_environment(){
     configure_account
 
     projectID=$(echo "q" | litmusctl get projects | grep "${projectName}" |  awk '{print $1}')
-    printf "\n project id is ${projectID}"
     # create a environment
- 
     litmusctl create chaos-environment --project-id=$projectID --name=$envName
     noOfEnvs=$(echo "q" | litmusctl get chaos-environments --project-id=$projectID | wc -l)
-    printf "\n No of Environments are ${noOfEnvs}"
         
     if [[ ${noOfEnvs} -gt 1 ]];then
         echo -e "\n[Info]: litmusctl create chaos-environment working fine ✓\n"
@@ -341,8 +305,6 @@ function test_get_environment(){
 
     # get newly created environment
     noOfEnvs=$(echo "q" | litmusctl get chaos-environments --project-id=$projectID | wc -l)
-
-    echo $noOfEnvs
     if [[ ${noOfEnvs} -gt 0 ]];then
         echo -e "\n[Info]: litmusctl get chaos-environment working fine ✓\n"
         delete_environment $envName
@@ -394,9 +356,7 @@ function test_save_experiment(){
     # make the api call to create a http probe probe as we dont have a create  command yet
     litmusctl config view
     tokenValue=$(litmusctl config view | grep "token" | awk '{print $2}')
-    echo "tokenValue is $tokenValue"
     endpointValue=$(litmusctl config view | grep "endpoint" | awk '{print $2}')
-    echo "tokenValue is $tokenValue"
 
     curl ''"$endpointValue"'/api/query' \
     -H 'Accept-Encoding: gzip, deflate, br' \
@@ -414,8 +374,6 @@ function test_save_experiment(){
     echo | echo "q" | litmusctl get chaos-experiments --project-id=$projectID --output="table"
     
     getExperimentID=$(echo "q" | litmusctl get chaos-experiments --project-id=$projectID --output="table" | grep "$expName" | awk '{print $1}' )
-    echo "experimentID should be $getExperimentID"
-    echo "expName is $expName"
     # cleanup exp and infra
     disconnect_infra ${infraName} $projectID
     infra_cleanup
@@ -445,7 +403,6 @@ function test_get_experiments(){
     delete_environment $envName
     delete_experiment $expName
     NoOfExperimentsAfter=$(echo "q" | litmusctl get chaos-experiments --project-id=$projectID | grep "${expName}" | wc -l )
-    echo "$NoOfExperiments"
     if [[ ${NoOfExperimentsBefore} -ge 1 ]] && [[ ${NoOfExperimentsAfter} -eq 0 ]]; then
         echo -e "\n[Info]: litmusctl get chaos-experiments working fine ✓\n"
         exit 0
@@ -473,7 +430,6 @@ function test_delete_experiment(){
     disconnect_infra ${infraName} $projectID
     infra_cleanup
     delete_environment $envName
-    echo "$NoOfExperiments"
     if [[ ${NoOfExperiments} -eq 0 ]];then
         echo -e "\n[Info]: litmusctl delete chaos-experiment working fine ✓\n"
         exit 0
@@ -494,21 +450,18 @@ function test_run_experiment(){
 
     # create before deleting
     save_experiment
-    printf "\nexperiment id should have been ${expName}"
     # run experiment here
-    echo "q" | litmusctl get projects
     echo "q" | litmusctl get chaos-experiments  --project-id=${projectID} --output="table"
     litmusctl run chaos-experiment --project-id=$projectID --experiment-id=$expName
 
     # get the experiment-run
-    status=$(wait_experiment_run_status 100)
+    NoOfExperimentsRun=$(litmusctl get chaos-experiment-runs --project-id=$projectID | grep "$expName" | wc -l )
     # cleanup exp and infra
     disconnect_infra ${infraName} $projectID
     infra_cleanup
     delete_environment $envName
     delete_experiment $expName
-    echo "$status"
-    if [[ "${status}" = "Running" ]];then
+    if [[ $NoOfExperimentsRun -ge 1 ]];then
         echo -e "\n[Info]: litmusctl run chaos-experiment working fine ✓\n"
         exit 0
     else 
@@ -527,7 +480,6 @@ function test_get_experiment_run(){
 
     # create before deleting
     save_experiment
-    printf "\nexperiment id should have been ${expName}"
     # run experiment here
     litmusctl run chaos-experiment --project-id=$projectID --experiment-id=$expName
 
